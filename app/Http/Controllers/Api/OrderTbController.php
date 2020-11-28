@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\model\OrderTb;
+use App\Model\OrderTb;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Foods;
