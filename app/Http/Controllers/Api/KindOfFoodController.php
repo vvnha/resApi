@@ -11,7 +11,7 @@ class KindOfFoodController extends Controller
 {
     public function index(Request $request){
         $data = KindOfFood::all();
-        echo $request;
+        
         return response()->json(['success' => true, 'code' => '200', 'data' => $data]);
     }
     public function getModel(Request $request, $id){

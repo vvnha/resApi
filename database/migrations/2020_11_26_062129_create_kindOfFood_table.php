@@ -13,13 +13,6 @@ class CreateKindOfFoodTable extends Migration
      */
     public function up()
     {
-        Schema::create('kindOfFoods', function (Blueprint $table) {
-            $table->increments('parentID')->length(13)->unsigned();
-            $table->string('name',255);
-            $table->string('img',255);
-            $table->text('detail')->nullable();
-            $table->timestamps();
-        });
     }
 
     /**
