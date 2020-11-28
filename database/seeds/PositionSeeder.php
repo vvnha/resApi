@@ -26,7 +26,7 @@ class PositionSeeder extends Seeder
             ['userID' => '1', 'mess' => 'Oke la', 'time' => '2020-11-26 10:44:52'],
             ['userID' => '1', 'mess' => 'Oke ngon', 'time' => '2020-11-26 10:44:52']
          ]);
-         DB::table('kindoffoods')->insert([
+         DB::table('kindOfFoods')->insert([
             ['name' => 'food', 'detail' => '', 'img' => ''],
             ['name' => 'drink', 'detail' => '', 'img' => ''],
             ['name' => 'other', 'detail' => '', 'img' => '']
@@ -39,11 +39,11 @@ class PositionSeeder extends Seeder
             ['userID' => '1','userName' => 'Võ Văn Nhã','mess'=>'Món này thì ngon', 'time' => '2020-11-26 10:44:52', 'foodID'=>'1' ],
             ['userID' => '2','userName' => 'Trần Văn Quý','mess'=>'Món này cũng được', 'time' => '2020-11-26 10:44:52', 'foodID'=>'1' ]
          ]);
-         DB::table('ordertables')->insert([
+         DB::table('orderTables')->insert([
             ['userID' => '1','total' => '2000000', 'orderDate'=>'2020-11-26 10:44:52', 'perNum'=>'4,5', 'dateClick'=>'2020-11-26 10:44:52' ],
             ['userID' => '2','total' => '6000000', 'orderDate'=>'2020-11-26 10:44:52', 'perNum'=>'4,5', 'dateClick'=>'2020-11-26 10:44:52' ],
          ]);
-         DB::table('orderdetails')->insert([
+         DB::table('orderDetails')->insert([
             ['orderID' => '1','foodID' => '1', 'qty'=>'1', 'price' => '200000'],
             ['orderID' => '2','foodID' => '2', 'qty'=>'2', 'price' => '300000'],
             ['orderID' => '1','foodID' => '1', 'qty'=>'1', 'price' => '200000']
