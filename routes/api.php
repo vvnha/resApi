@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
     Route::post('register','RegisterController@register');
     Route::post('login','LoginController@login');
+    Route::post('token','LoginController@token'); // login có token lưu lại, gọi cái này để xác thực đúng token lưu trên máy ko
 
     Route::get('/food', ['as' => 'food', 'uses' => 'FoodController@index']);
     Route::get('/food/parent/{id}', ['as' => 'food', 'uses' => 'FoodController@getOneModel']);

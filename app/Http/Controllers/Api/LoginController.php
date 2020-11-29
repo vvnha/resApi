@@ -6,6 +6,7 @@ use App\Model\SessionUser;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use App\Quotation;
 
@@ -13,11 +14,20 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-    	$datachecklogin = [
+    	
+		$validator = Validator::make($request->all(), [ 
+            'email' => 'required|email', 
+            'password' => 'required', 
+        ]);
+
+        if ($validator->fails()) { 
+            return response()->json(['error'=>$validator->errors()], 401);            
+        }   
+        $datachecklogin = [
     		'email'=>$request->email,
     		'password'=>$request->password
-        ];
-        
+		];
+
     	if(Auth::attempt($datachecklogin)){
             // dd(Auth::attempt($datachecklogin));
     		$checkTokenExit= SessionUser::where('user_id', Auth::id())->first();
@@ -32,6 +42,12 @@ class LoginController extends Controller
     		]);
     		} else {
     					$sessionuser=$checkTokenExit;
+                        $checkTokenExit->update([
+                            'token' => Str::random(40),
+                            'refresh_token'=> Str::random(40),
+                            'token_expried'=> date('Y-m-d H:i:s', strtotime(' +30 day')),
+                            'refresh_token_expried'=> date('Y-m-d H:i:s', strtotime(' +360 day'))
+                        ]);
     				}	
     	} else {
     		return response()->json([
@@ -43,6 +59,23 @@ class LoginController extends Controller
 	    		'code' => '200',
 	    		'data' => $sessionuser	    		
     	]);
-// token	refresh_token	token_expried	refresh_token_expried	user_id
+	}
+	
+	public function token(Request $request)
+    {
+        $checkToken = SessionUser::where('token', $request->token)->where('user_id', $request->user_id)->first(); 
+        if (empty($checkToken)) {
+            return response()->json([
+                'code' => '200',
+                'data' => false      
+        ]);
+        }else{
+            $name = User::select('name','email','phone','positionID')->where('id', $request->user_id)->first();
+            return response()->json([
+                'code' => '200',
+                'data' => $name      
+            ]);
+        }
+       
     }
 }

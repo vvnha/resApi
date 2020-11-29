@@ -10,6 +10,9 @@ class User extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'integer';
     protected $guarded = [];
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
     protected function position(){
         return $this->belongsTo('App\Model\Position','positionID');
     }

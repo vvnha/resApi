@@ -11,9 +11,6 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-    	// dd("ok");
-
-
     	$validator = Validator::make($request->all(), [ 
             'name' => 'required', 
             'email' => 'required|email', 
@@ -27,8 +24,11 @@ class RegisterController extends Controller
         }
 
         // check tai khoan
-     
-
+        $user = User::where('email', $request->email)->first();
+        if (!empty($user)) {
+            return response()->json(['message'=>'Tai khoan da ton tai'], 401);
+        }
+    
     	$user = new User;
 		$user->name=$request->name;
 		$user->email =$request->email;
